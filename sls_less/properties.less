@@ -1,0 +1,32 @@
+.set-mb-property(@propertyA,@valueA){
+    @{propertyA}: @valueA;
+    -o-@{propertyA}: @valueA;
+    -moz-@{propertyA}: @valueA;
+    -webkit-@{propertyA}: @valueA;
+} 
+
+.set-calc-property(@propertyA,@valueH,@valueL){
+    @{propertyA}: calc(@valueH e("+") @valueL);
+    @{propertyA}: -o-calc(@valueH e("+") @valueL);
+    @{propertyA}: -moz-calc(@valueH e("+") @valueL);
+    @{propertyA}: -webkit-calc(@valueH e("+") @valueL);
+}
+
+.set-prop-series(@classNameA:'',@propertyA:'',@startA:0,@endA:0,@stepA:0){
+    each(range(@startA,@endA,@stepA),{
+        @cls: @{classNameA}-@{index};
+        @val: @{value};
+        @{cls}{
+            @{propertyA}: @val;
+        }
+    });    
+}
+
+.set-mb-prop-series(@classNameA:'',@propertyA:'',@startA:0,@endA:0,@stepA:0){
+    each(range(@startA,@endA,@stepA),{
+        @cls: @{classNameA}-@{index};
+        @{cls}{
+            .set-mb-property(@propertyA,@value);
+        }
+    });    
+}

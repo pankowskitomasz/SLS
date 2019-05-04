@@ -1,0 +1,21 @@
+set-background(imgA="",imgURL=0,positionA="top left",sizeA="cover",attachA="fixed")
+    background-attachment = attachA
+    if(imgURL == 1)
+        background-image: imgA
+    else
+        background-image: url(imgA)
+    background-position: positionA
+    background-repeat: no-repeat
+    background-size: sizeA
+
+set-bg-series(classNameA='',imgArrayA='',imgURL=0,positionA="top left",sizeA="cover",attachA="fixed")
+    if(classNameA != "")
+        for i in range(0,length(imgArrayA) - 1)
+            .{classNameA}-{i+1}
+                set-background(imgArrayA[i],imgURL,positionA,sizeA,attachA)
+        
+aoa-bg-series(classArrayA='',imgAoA='',imgURL=0,positionA="top left",sizeA="cover",attachA="fixed")
+    if(length(classArrayA) == length(imgAoA))
+        for i in range(0,length(classArrayA) - 1)
+            set-bg-series(classArrayA[i],imgAoA[i],imgURL,positionA,sizeA,attachA)
+        

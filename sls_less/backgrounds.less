@@ -1,0 +1,27 @@
+.set-background(@imgA:"",@imgURL:0,@positionA:"top left",@sizeA:"cover",@attachA:"fixed"){
+    background-image: if( (@imgURL = 1), @imgA, url( @imgA ));
+    background-attachment: @attachA;
+    background-position: @positionA;
+    background-repeat: no-repeat;
+    background-size: @sizeA;
+}
+
+.set-bg-series(@classNameA,@imgArrayA:'',@imgURL:0,@positionA:"top left",@sizeA:"cover",@attachA:"fixed"){
+    if(not (@classNameA = '') and not(@imgArrayA = ''),
+        each(@imgArrayA,{
+            @cls: @{classNameA}-@{index};
+            @{cls}{ 
+                .set-background(@value,@imgURL,@positionA,@sizeA,@attachA);
+            }
+        }
+    ));
+}
+          
+.aoa-bg-series(@classArrayA:'',@imgAoA:'',@imgURL:0,@positionA:"top left",@sizeA:"cover",@attachA:"fixed"){
+    if(not (@classArrayA = '') and not(@imgAoA = ''),
+        each(@classArrayA,{
+            .set-bg-series(@value,extract(@imgAoA,@index),@imgURL,@positionA,@sizeA,@attachA);
+        }
+    ));
+}            
+    
